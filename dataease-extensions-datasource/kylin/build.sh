@@ -1,6 +1,11 @@
 #!/bin/sh
- mvn clean package -U -Dmaven.test.skip=true
+[ x"de_ver" = x"" ] && de_ver=1.18.7
+rm -f kylin.zip
 
-cp kylin-backend/target/kylin-backend-1.18.0.jar .
+mvn clean package -U -Dmaven.test.skip=true
 
-zip -r kylin.zip  ./kylin-backend-1.18.0.jar ./kylinDriver   ./plugin.json
+cp kylin-backend/target/kylin-backend-${de_ver}.jar .
+
+zip -r kylin.zip  ./kylin-backend-${de_ver}.jar ./kylinDriver   ./plugin.json
+
+rm -f ./kylin-backend-${de_ver}.jar

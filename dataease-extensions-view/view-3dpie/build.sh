@@ -1,8 +1,11 @@
 #!/bin/sh
-mvn clean package
+[ x"$de_ver" = x"" ] && de_ver=1.18.7
+rm -f 3dpie.zip 
 
-cp view-3dpie-backend/target/view-3dpie-backend-1.18.3.jar .
+mvn clean package -U -Dmaven.test.skip=true 
 
-zip -r 3dpie.zip  ./view-3dpie-backend-1.18.3.jar ./plugin.json
+cp view-3dpie-backend/target/view-3dpie-backend-${de_ver}.jar .
 
-rm -f ./view-3dpie-backend-1.18.3.jar
+zip -r 3dpie.zip  ./view-3dpie-backend-${de_ver}.jar ./plugin.json
+
+rm -f ./view-3dpie-backend-${de_ver}.jar
